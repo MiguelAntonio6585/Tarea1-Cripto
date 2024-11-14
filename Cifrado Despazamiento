@@ -1,0 +1,79 @@
+Escribe un script en python para que dado un texto y un numero "k", le quite todo carácter que no sea alfabético, lo pase a mayuscula y lo convierta en numero ascii y ejecute para cada letra la operación c=(m+k)%N, donde m es la letra, N es la cantidad de letras del alfabeto en ingles, convierta los resultados en letras nuevamente y concatene el resultado y lo muestre. 
+ChatGPT dijo:
+Claro, a continuación te presento el script en Python que realiza lo que me has pedido:
+
+Objetivos:
+Eliminar los caracteres no alfabéticos del texto.
+Convertir todo el texto a mayúsculas.
+Convertir cada letra a su valor ASCII.
+Ejecutar la operación de cifrado 
+c
+=
+(
+m
++
+k
+)
+m
+o
+d
+ 
+ 
+N
+c=(m+k)modN, donde:
+m
+m es el valor de la letra en el alfabeto (0 para 'A', 1 para 'B', ..., 25 para 'Z').
+N
+N es 26 (el número de letras en el alfabeto inglés).
+Convertir el valor cifrado de vuelta a una letra.
+Concatenar el resultado y mostrarlo.
+Código:
+def cifrar_texto(texto, k):
+    # Definir el tamaño del alfabeto inglés (26 letras)
+    N = 26
+    
+    # Filtrar el texto para dejar solo los caracteres alfabéticos y convertir todo a mayúsculas
+    texto_filtrado = ''.join([caracter.upper() for caracter in texto if caracter.isalpha()])
+    
+    resultado = []
+    
+    # Recorrer cada letra del texto filtrado
+    for letra in texto_filtrado:
+        # Convertir la letra a su valor numérico en el alfabeto (0 para 'A', 1 para 'B', ..., 25 para 'Z')
+        m = ord(letra) - ord('A')
+        
+        # Aplicar la operación c = (m + k) % N
+        c = (m + k) % N
+        
+        # Convertir de nuevo al carácter correspondiente
+        letra_cifrada = chr(c + ord('A'))
+        
+        # Añadir la letra cifrada al resultado
+        resultado.append(letra_cifrada)
+    
+    # Unir el resultado en una cadena
+    return ''.join(resultado)
+
+# Prueba del script
+texto = "Hola, Mundo! 123"
+k = 3
+texto_cifrado = cifrar_texto(texto, k)
+print("Texto cifrado:", texto_cifrado)
+Explicación paso a paso:
+Filtrado y conversión a mayúsculas: Usamos letra.isalpha() para filtrar solo los caracteres alfabéticos (se descartan los números, signos de puntuación, etc.), y luego convertimos todas las letras a mayúsculas con letra.upper().
+
+Conversión a valor numérico: La función ord(letra) convierte la letra en su valor ASCII. Para obtener la posición de la letra en el alfabeto (donde 'A' es 0, 'B' es 1, ..., 'Z' es 25), restamos el valor de 'A' (que tiene un valor ASCII de 65). Esto normaliza la letra para que su valor esté entre 0 y 25.
+
+Aplicación de la fórmula de cifrado: La operación de cifrado es (m + k) % N, donde m es la posición de la letra en el alfabeto, k es el desplazamiento proporcionado y N es 26 (el número de letras en el alfabeto inglés).
+
+Reconversión a letra: Después de obtener el valor cifrado, usamos chr(c + ord('A')) para convertir el valor numérico de nuevo a su letra correspondiente en el alfabeto.
+
+Concatenación del resultado: Finalmente, las letras cifradas se concatenan y se devuelven como una cadena.
+
+Ejemplo de uso:
+Si proporcionamos el texto "Hola, Mundo! 123" y elegimos un valor de k = 3, el resultado será:
+
+Texto cifrado: KROD PXQGR
+Este resultado es el texto cifrado con el desplazamiento de 3 posiciones en el alfabeto, después de haber filtrado los caracteres no alfabéticos y convertido todo a mayúsculas.
+
+
